@@ -1,3 +1,6 @@
+import json
+
+
 def check_choice(choice):
         match choice:
             case 1:
@@ -18,6 +21,21 @@ def check_choice(choice):
 
         return False
 
+def load_notes():
+    try:
+        with open("notes.json", "r") as file:
+            notes = json.load(file)
+            return notes
+    except FileNotFoundError:
+        return []
+
+def save_notes():
+    with open("notes.json","w") as file:
+        json.dump(notes,file,indent = 4)
+
+
+notes = load_notes()
+
 
 def add_note():
     note_id_input = int(input("Enter note id: "))
@@ -37,10 +55,10 @@ def add_note():
         "content" : notes_input
     }
     notes.append(note)
+    save_notes()
     print("Note saved successfully!")
 
 
-notes = []
 
 
 def view_note():
@@ -88,6 +106,7 @@ def delete_note():
             delete_ques = input("Are you sure you want to delete this note? (yes/no): ")
             if delete_ques.lower() == "yes":
                 notes.remove(note)
+                save_notes()
                 print("Note deleted successfully!")
             else:
                 print("Note deletion cancelled!")
