@@ -1,5 +1,152 @@
-import json
+# import json
 
+# class Note:
+#     def __init__(self, note_id, topic, category, content):
+#         self.note_id = note_id
+#         self.topic = topic
+#         self.category = category
+#         self.content = content
+    
+#     def to_dict(self):
+#         return {
+#             "note_id": self.note_id,
+#             "topic": self.topic,
+#             "category": self.category,
+#             "content": self.content
+#         }
+    
+#     @classmethod
+#     def from_dict(cls,data):
+#         return cls(
+#             data["note_id"],
+#             data["topic"],
+#             data["category"],
+#             data["content"]
+#         )
+
+# class NoteManager():
+#     def __init__(self):
+#         self.notes = []
+#         self.load_notes()
+    
+#     def add_note(self, note):
+
+#         # Check for duplicate Note ID
+#         for existing_note in self.notes:
+#             if existing_note.note_id == note.note_id:
+#                 print("Note ID already exists!")
+#                 return
+        
+#         # Add note if ID is unique
+#         self.notes.append(note)
+#         self.save_notes()
+#         print("Note saved successfully!")
+    
+#     def view_note(self):
+#         if not self.notes:
+#             print("No notes avaiable.")
+#             return
+
+#         print("========== ALL NOTES ==========")
+#         for note in self.notes:
+#             print(f"Note Id: {note.note_id}")
+#             print(f"Topic: {note.topic}")
+#             print(f"Category: {note.category}")
+#             print(f"Content: {note.content}")
+#             print("-----------------------------------")
+    
+#         print("Total Notes:" , len(self.notes))
+
+#     def search_notes(self, topic):
+#         count = 0
+#         found = False
+        
+#         print("========== SEARCH RESULTS ==========")
+        
+#         for note in self.notes:
+#             if topic.lower() in note.topic.lower():
+#                 found = True
+#                 count += 1
+          
+#                 print(f"Note Id: {note.note_id}")
+#                 print(f"Topic: {note.topic}")
+#                 print(f"Category: {note.category}")
+#                 print(f"Content: {note.content}")
+        
+#         if not found:
+#             print("No matching notes found!")
+#         else:
+#             print(count, "matching notes found.")
+    
+#     def delete_note(self, note_id):
+#         found = False
+        
+#         print("========== DELETE NOTE ==========")
+        
+#         for note in self.notes:
+#             if note_id == note.note_id:
+#                 found = True
+                
+#                 delete_ques = input("Are you sure? (yes/no): ").strip().lower()
+                
+#                 if delete_ques.lower() == "yes":
+#                     self.notes.remove(note)
+#                     self.save_notes()
+#                     print("Note deleted successfully!")
+#                 else:
+#                     print("Note deletion cancelled!")
+#                 break
+
+#         if not found:
+#             print("Note ID not found!")
+    
+#     def view_categories(self):
+#         categories = set()
+        
+#         print("========== AVAILABLE CATEGORIES ==========")
+#         if not self.notes:
+#             print("No categories available.")
+#             return
+        
+#         for note in self.notes:
+#             categories.add(note.category)
+        
+#         for index, category in enumerate(sorted(categories), start=1):
+#             print(f"{index}.{category}")
+        
+#         print("Total Categories: ", len(categories)) 
+
+#     def load_notes(self):
+#         try:
+#             with open("notes.json", "r") as file:
+#                 data = json.load(file)
+#                 self.notes = [
+#                     Note.from_dict(note_data) for note_data in data
+#                 ]
+
+#         except FileNotFoundError:
+#             self.notes = []
+        
+#         except json.JSONDecodeError:
+#             print("Error: notes.json contains invalid JSON.")
+#             self.notes = []
+    
+#     def save_notes(self):
+#         data = [note.to_dict() for note in self.notes]
+
+#         with open("notes.json","w") as file:
+#             json.dump(data, file, indent=4)
+    
+#     def exit_application():
+#         print("Thank you for using AI Study Assistant!")
+#         print("Keep Learning. Keep Building.")
+#         print("Application closed successfully.")
+#         return True
+
+
+# my_notes = NoteManager()
+
+import json
 
 def check_choice(choice):
         match choice:
@@ -33,7 +180,6 @@ def save_notes():
     with open("notes.json","w") as file:
         json.dump(notes,file,indent = 4)
 
-
 notes = load_notes()
 
 
@@ -58,9 +204,6 @@ def add_note():
     save_notes()
     print("Note saved successfully!")
 
-
-
-
 def view_note():
     if not notes:
         print("No notes available.")
@@ -73,7 +216,6 @@ def view_note():
             print("Content:", note["content"])
             print("-----------------------------------------------")
         print(len(notes))
-
 
 def search_note():
     search_input = input("Enter topic to search: ")
@@ -95,7 +237,6 @@ def search_note():
     else:
         print(count, "matching notes found.")
 
-
 def delete_note():
     delete_note_id_input = int(input("Enter Note ID to delete: "))
     found = False
@@ -115,7 +256,6 @@ def delete_note():
     if not found:
         print("Note ID not found!")
 
-
 def view_categories():
     categories = set()
 
@@ -132,14 +272,11 @@ def view_categories():
     
     print("Total Categories : ", len(categories))  
 
-
 def exit_application():
     print("Thank you for using AI Study Assistant!")
     print("Keep Learning. Keep Building.")
     print("Application closed successfully.")
     return True
-
-
 
 while (True):
     print("===========================================================")
